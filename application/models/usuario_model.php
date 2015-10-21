@@ -12,6 +12,17 @@
 				return false;
 			}
 		}
+
+		public function allUsers(){
+			$this->db->select('nome');
+			$this->db->select('usuario');
+			$this->db->select('acesso');
+			return $this->db->get('tbl_usuario')->result();
+		}
+
+		public function gravarUsuario($dados_usuario){
+			$this->db->insert('tbl_usuario', $dados_usuario);
+		}
 		
 	}
 

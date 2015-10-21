@@ -31,8 +31,7 @@ header("Content-Type: text/html; charset=UTF-8");
 								<span class="caret"></span>
 							</a>
 							<ul class="dropdown-menu" role="menu" aria-labelledby="drop1">
-								<li role="presentation"><a role="menuitem" tabindex="-1" href="gestaousuarios
-									"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Usuário</a></li>
+								<li role="presentation"><a role="menuitem" tabindex="-1" href="gestaousuarios"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Usuário</a></li>
 							</ul>
 						</li>					
 					</ul>
@@ -56,99 +55,93 @@ header("Content-Type: text/html; charset=UTF-8");
 		<div class="container-fluid stats">
 			<div class="row">
 				<div class="col-xs-12 col-sm-12 col-md-12">
-					<h1>Dashboard <small> Resumo de Estatísticas</small></h1>
+					<h1>Gestão de Usuários<small> </small></h1>
 					<hr>
 					<ol class="breadcrumb">
 					  <li>
-					  	<span class="page-actual"><span class="glyphicon glyphicon-dashboard" aria-hidden="true"></span> Dashboard</span>
+					  	<span class="glyphicon glyphicon-dashboard" aria-hidden="true"></span> 
+					  	<a href="dashboard">Dashboard</a> / 					  	<span class="page-actual"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Gestão de Usuários</span>
 					  </li>
 					</ol>
 				</div>
 			</div>
+		</div>
+		<div class="container-fluid">
 			<div class="row">
-				<div class="col-xs-12 col-sm-6 col-md-3">
-					<div class="panel panel-info">
-						<div class="panel-heading">
-							<div class="row">
-								<div class="col-xs-3">
-									<span class="glyphicon glyphicon-inbox panels"></span>
-								</div>
-								<div class="col-xs-9 text-right">
-									<div class="huge"><?php echo($num_coletas); ?></div>
-									<div>Coletas Realizadas!</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-xs-12 col-sm-6 col-md-3">
+				<div class="col-xs-12 col-sm-12 col-md-12">
 					<div class="panel panel-primary">
-						<div class="panel-heading">
-							<div class="row">
-								<div class="col-xs-3">
-									<span class="glyphicon glyphicon-inbox panels"></span>
-								</div>
-								<div class="col-xs-9 text-right">
-									<div class="huge"><?php echo($coletas_hoje); ?></div>
-									<div>Coletas Realizadas Hoje!</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-xs-12 col-sm-6 col-md-3">
-					<div class="panel panel-info">
-						<div class="panel-heading">
-							<div class="row">
-								<div class="col-xs-3">
-									<span class="glyphicon glyphicon-inbox panels"></span>
-								</div>
-								<div class="col-xs-9 text-right">
-									<div class="huge"><?php echo($postado); ?></div>
-									<div>Retwetados!</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-xs-12 col-sm-6 col-md-3">
-					<div class="panel panel-primary">
-						<div class="panel-heading">
-							<div class="row">
-								<div class="col-xs-3">
-									<span class="glyphicon glyphicon-inbox panels"></span>
-								</div>
-								<div class="col-xs-9 text-right">
-									<div class="huge"><?php print_r($seguidores->numero_seguidores); ?></div>
-									<div>Seguidores!</div>
-								</div>
-							</div>
-						</div>
+					  <div class="panel-heading">
+					    <h3 class="panel-title"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Cadastro de Usuário</h3>
+					  </div>
+					  <div class="panel-body">
+					  	<form>
+					  		<div class="form-group">
+					  			<input type="text" class="form-control" id="txtNome" placeholder="Nome Completo">
+					  		</div>
+					  		<div class="form-group">
+					  			<input type="text" class="form-control" id="txtUsuario" placeholder="Usuário">
+					  		</div>
+					  		<div class="form-group">
+					  			<input type="password" class="form-control" id="txtSenha" placeholder="Digite sua senha">
+					  			<input type="password" class="form-control" id="txtSenha2" placeholder="Digite novamento sua senha">
+					  		</div>
+					  		<div class="form-group">
+					  			<select class="form-control" id="slcAcesso">
+					  				<option value="A">Administrador</option>
+					  				<option value="N">Normal</option>
+					  			</select>
+					  		</div>
+					  		<button id="btnNovoUsu" type="button" class="btn btn-success btn-block">Salvar</button>
+					  	</form>
+					  </div>
 					</div>
 				</div>
 			</div>
 		</div>
 		<div class="container-fluid">
 			<div class="row">
-				<div class="col-xs-12 col-sm-8 col-md-8">
-					<div class="panel panel-default">
+				<div class="col-xs-12 col-sm-12 col-md-12">
+					<div class="panel panel-primary panel-usuarios">
 						<div class="panel-heading">
-							<h3 class="panel-title"><span class="glyphicon glyphicon-stats"></span> Seguidores</h3>
+							<h3 class="panel-title"><span class="glyphicon glyphicon-list-alt"></span> Usuários</h3>
 						</div>
 						<div class="panel-body">
-							<div id="myfirstchart" style="height: 350px;"></div>
+							<div class="table-responsive">
+								<table class="table table-bordered table-hover table-striped">
+									<thead>
+										<tr>
+											<th>Nome</th>
+											<th>Usuário</th>
+											<th>Acesso</th>
+											<th></th>
+										</tr>
+									</thead>
+									<?php
+
+									for ($i=0; $i < count($usuarios); $i++) { 
+										echo "
+									<tbody>
+										<tr>
+											<td>".$usuarios[$i]->nome."</td>
+											<td>".$usuarios[$i]->usuario."</td>
+											<td>".$usuarios[$i]->acesso."</td>
+											<td>
+												<button type='button' class='btn btn-info' aria-label='Left Align'>
+  												<span class='glyphicon glyphicon-edit' aria-hidden='true'></span>
+												</button>
+												<button type='button' class='btn btn-danger' aria-label='Left Align'>
+  												<span class='glyphicon glyphicon-remove' aria-hidden='true'></span>
+												</button>
+											</td>
+										</tr>
+									</tbody>
+										";
+									}									
+									?>
+								</table>
+							</div>
 						</div>
 					</div>
-				</div>
-				<div class="col-xs-12 col-sm-4 col-md-4">
-					<div class="panel panel-default">
-						<div class="panel-heading">
-							<h3 class="panel-title"><span class="glyphicon glyphicon-thumbs-up"></span> Mais postados </h3>
-						</div>
-						<div class="panel-body">
-							<div id="mysecondchart" style="height: 350px;"></div>
-						</div>
-					</div>	
 				</div>
 			</div>
 		</div>
@@ -160,5 +153,3 @@ header("Content-Type: text/html; charset=UTF-8");
 <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url('includes/bootstrap/js/bootstrap.min.js'); ?>"></script>
-
-

@@ -17,9 +17,16 @@
 		}
 
 		public function seguidores(){
+			$where = "data_hora=(SELECT MAX(data_hora) FROM seguidores)";
+			$this->db->where($where);
 			$this->db->select('numero_seguidores');
-			$this->db->select_max('data_hora');
 			return $this->db->get('seguidores')->row();
+		}
+
+		public function allSeguidores(){
+			$this->db->order_by('id_seguidor','desc');
+			$this->db->limit(6);
+			return $this->db->get('seguidores')->result();
 		}
 	}
 

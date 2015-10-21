@@ -41,6 +41,12 @@
 			}
 		}
 
+		public function seguidores(){
+			$seguidores = $this->coletas_model->allSeguidores();
+			$seguidores = json_encode($seguidores);
+			echo $seguidores;
+		}
+
 	}
 
 ?>
